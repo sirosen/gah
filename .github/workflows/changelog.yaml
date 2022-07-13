@@ -5,6 +5,7 @@ on:
       - labeled
       - unlabeled
       - opened
+      - reopened
       - synchronize
 
 jobs:
