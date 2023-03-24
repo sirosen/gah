@@ -1,0 +1,23 @@
+name: comment-with-build-info
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+
+permissions:
+  pull-requests: write
+
+jobs:
+  modify_pr_description_if_necessary:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      - run: pip install requests
+      - run: python ./commentbot.py "commentbot wuz here"
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          PR_NUMBER: "${{ github.event.number }}"
